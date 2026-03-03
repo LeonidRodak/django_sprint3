@@ -27,7 +27,7 @@ def post_detail(request, id):
         is_published=True,
         category__is_published=True
     )
-    context = {'post_list': post}
+    context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
 
