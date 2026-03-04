@@ -1,12 +1,16 @@
 from django.contrib import admin
 from .models import Post, Category, Location
 
+# Регистрируем модель Category в админке с помощью декоратора @admin.register
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'is_published', 'created_at')
+    # Поле, которое можно быстро включать/выключать из списка
     list_editable = ('is_published',)
     search_fields = ('title', 'description')
+    # slug будет генерироваться автоматически из title
     prepopulated_fields = {'slug': ('title',)}
 
 
@@ -26,4 +30,5 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('is_published',)
     list_filter = ('category', 'location', 'is_published', 'author')
     search_fields = ('title', 'text')
+    # Позволяет фильтровать публикации по дате публикации
     date_hierarchy = 'pub_date'

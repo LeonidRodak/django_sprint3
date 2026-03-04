@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR — абсолютный путь к корневой директории проекта
+# __file__ — путь к текущему файлу (settings.py)
+# .parent.parent — поднимаемся на два уровня вверх:
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -28,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
+# Важен порядок
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'pages']
 
+# Обработчиков запросов/ответов
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +57,9 @@ ROOT_URLCONF = 'blogicum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Пути к директориям с шаблонами (вне приложений)
         'DIRS': [BASE_DIR / 'templates'],
+        # Искать шаблоны также в папке templates/ внутри каждого приложения
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,6 +89,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
+# Правила валидации паролей при регистрации/смене пароля
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -109,17 +115,20 @@ TIME_ZONE = 'Asia/Vladivostok'
 
 USE_I18N = True
 
+# Включить поддержку множественных языков
 USE_L10N = True
 
+# Включить поддержку часовых поясов
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# URL-префикс для доступа к статическим файлам
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']  # если будет папка static
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+# Получаем модель пользователя для использования в ForeignKey
 User = get_user_model()
 
 
@@ -23,6 +24,8 @@ class Location(models.Model):
     class Meta:
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
+    # Метод для строкового представления объекта
+    # Используется в админке и при выводе в шаблонах
 
     def __str__(self):
         return self.name
@@ -77,6 +80,7 @@ class Post(models.Model):
         help_text=('Если установить дату и время в будущем'
                    ' — можно делать отложенные публикации.')
     )
+    # ForeignKey — связь "один ко многим"
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -86,6 +90,7 @@ class Post(models.Model):
         Location,
         on_delete=models.SET_NULL,
         null=True,
+        # поле необязательное для заполнения
         blank=True,
         verbose_name='Местоположение'
     )

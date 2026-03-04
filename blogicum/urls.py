@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # Все URL, начинающиеся с 'admin/', будут обрабатываться админкой
     path('admin/', admin.site.urls),
+    # namespace='blog' позволяет использовать {% url 'blog:index' %} в шаблонах
     path('', include('blog.urls', namespace='blog')),
     path('pages/', include('pages.urls', namespace='pages')),
 ]
