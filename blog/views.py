@@ -11,7 +11,8 @@ from .models import Post, Category
 
 def index(request):
     """Главная страница — 5 последних опубликованных постов"""
-    # select_related — оптимизация, подгружает связанные объекты одним запросом
+    # select_related — оптимизация, подгружает связанные объекты одним
+    # запросом,вместо множества отдельных запросов (N+1)
     posts = Post.objects.select_related('category', 'location').filter(
         # Дата публикации ≤ текущего времени
         pub_date__lte=timezone.now(),
